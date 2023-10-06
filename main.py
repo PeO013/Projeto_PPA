@@ -1,14 +1,25 @@
 import json
-
+def contar_alternativas(pergunta):
+    contador = 0
+    linhas = pergunta.split("\n")
+    for linha in linhas:
+        if linha.startswith(("1)", "2)", "3)", "4)", "5)", "6)", "7)", "8)", "9)", "0)")):
+            contador += 1
+    return contador
+    
 def add_respostas(perguntas, respostas):
+    
     nova_resposta = {}
     for pergunta in perguntas:
-        print("responda apenas com o numero referente a sua resposta")
-        resposta = input(pergunta)
-        if resposta.isnumeric() and int(resposta) < 8:
-            nova_resposta[pergunta] = resposta
-        else:
+        while True:
+            max = contar_alternativas(pergunta)
             print("responda apenas com o numero referente a sua resposta")
+            resposta = input(pergunta)
+            if resposta.isnumeric() and int(resposta) < max:
+                nova_resposta[pergunta] = resposta
+                break
+            else:
+                True
     respostas.append(nova_resposta)
 
 def salvar_no_json(respostas, filename):
