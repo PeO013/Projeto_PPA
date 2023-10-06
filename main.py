@@ -1,6 +1,7 @@
 import json
 def contar_alternativas(pergunta):
     contador = 0
+    global linhas
     linhas = pergunta.split("\n")
     for linha in linhas:
         if linha.startswith(("1)", "2)", "3)", "4)", "5)", "6)", "7)", "8)", "9)", "0)")):
@@ -13,10 +14,12 @@ def add_respostas(perguntas, respostas):
     for pergunta in perguntas:
         while True:
             max = contar_alternativas(pergunta)
+            print(max)
             print("responda apenas com o numero referente a sua resposta")
             resposta = input(pergunta)
-            if resposta.isnumeric() and int(resposta) < max:
-                nova_resposta[pergunta] = resposta
+            if resposta.isnumeric() and int(resposta) <= max:
+                nova_resposta[linhas[0]] = linhas[int(resposta)]
+                print(nova_resposta)
                 break
             else:
                 True
